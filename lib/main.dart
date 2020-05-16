@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 List todos = List();
+String input = "";
 
   @override
   void initState() {
@@ -35,9 +36,29 @@ List todos = List();
       appBar: AppBar(
         title: Text("mytodos"),
       ),
-      floatingActionButton: FloatingActionButton(onPressed:
-      (){
+      floatingActionButton: FloatingActionButton(
+        onPressed:(){
 
+          showDialog(
+            context: context,
+             builder: (BuildContext context){
+                return AlertDialog(
+                    title: Text("Add Todolist"),
+                    content: TextField(
+                      onChanged: (String value,){
+                        input = value;
+                      },
+                    ),
+                    actions: <Widget>[
+                      FlatButton(onPressed: (){
+                        setState(() {
+                          todos.add(input);
+                        });
+                        Navigator.of(context).pop();
+                      },child: Text("Add"))
+                    ],
+                  );
+              });
       },
        child: Icon(
           Icons.add,
@@ -49,8 +70,19 @@ List todos = List();
           itemBuilder: (BuildContext context,int index){
         return Dismissible(key: Key(todos[index]), 
           child: Card(
+            elevation: 4,
+            margin: EdgeInsets.all(0),
+            shape: RoundedRectangleBorder(borderRadius:
+            BorderRadius.circular(8)),
             child: ListTile(
               title: Text(todos[index]),
+              trailing: IconButton(icon: Icon(Icons.delete
+              , color: Colors.red ,),
+                onPressed: () {
+                  setState(() {
+                    todos.removeAt(index);
+                  });
+                }),
             ),
         ));
   }),
