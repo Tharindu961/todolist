@@ -10,16 +10,50 @@ void main() => runApp(MaterialApp(
   home: MyApp(),
 ));
 
-class  extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _State createState() => _State();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _State extends State<> {
+class _MyAppState extends State<MyApp> {
+List todos = List();
+
+  @override
+  void initState() {
+    
+    super.initState();
+    todos.add("item1");
+    todos.add("item2");
+    todos.add("item3");
+    todos.add("item4");
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("mytodos"),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed:
+      (){
+
+      },
+       child: Icon(
+          Icons.add,
+          color: Colors.white,
+       ),
+       ),
+      body: ListView.builder(
+        itemCount: todos.length,
+          itemBuilder: (BuildContext context,int index){
+        return Dismissible(key: Key(todos[index]), 
+          child: Card(
+            child: ListTile(
+              title: Text(todos[index]),
+            ),
+        ));
+  }),
     );
   }
 }
