@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import '';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
@@ -38,11 +39,12 @@ String input = "";
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:(){
-
           showDialog(
             context: context,
              builder: (BuildContext context){
                 return AlertDialog(
+                    shape: RoundedRectangleBorder(borderRadius:
+                    BorderRadius.circular(8)),
                     title: Text("Add Todolist"),
                     content: TextField(
                       onChanged: (String value,){
